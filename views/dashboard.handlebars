@@ -21,11 +21,12 @@
 {{#if posts.length}}
 <section>
     <h2 class="mx-3 font-medium border-b-2 border-dotted border-slate-800">Your Posts</h2>
-    <ol>
+    <ol class="mb-3">
         {{#each posts as |post|}}
         <li>
             {{> post-info post}}
-            <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+            <a href="/dashboard/edit/{{post.post_id}}" class="bg-slate-900 hover:bg-slate-400 text-white px-3 py-2 rounded-md text-sm font-medium mx-6">Edit post</a>
+            <!-- <a href="/dashboard/delete/{{post.post_id}}" class="bg-slate-900 hover:bg-slate-400 text-white px-3 py-2 rounded-md text-sm font-medium mx-6">Delete post</a> -->
         </li>
         {{/each}}
     </ol>

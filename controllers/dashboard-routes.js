@@ -78,4 +78,15 @@ router.get('/edit/:id', withAuth, (req, res) => {
     });
 });
 
+router.get('/delete/:id', withAuth, (req, res) => {
+    Post.destroy({
+        where: { post_id: req.params.id }
+    }).then(dbPostData => {
+        res.redirect('/dashboard');
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 module.exports = router;

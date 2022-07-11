@@ -10,13 +10,15 @@ const hbs = exphbs.create({ helpers });
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+// Session expires in 15 minutes
 const sess = {
     secret: process.env.SECRET,
     cookie: {},
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
-        db: sequelize
+        db: sequelize,
+        expiration: 15*60*1000
     })
 };
 
