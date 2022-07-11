@@ -1,10 +1,14 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
+const { withAuth } = require('../utils/auth');
 
-// Homepage, show all posts
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
     Post.findAll({
+        where: {
+            // use the ID from the session
+            user_id: req.session.user_id
+        },
         attributes: [
             'post_id',
             'post_title',
@@ -14,7 +18,7 @@ router.get('/', (req, res) => {
         include: [
             {
                 model: Comment,
-                attributes: ['comment_id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                attributes: ['comment_id','comment_text','post_id','user_id','created_at'],
                 include: {
                     model: User,
                     attributes: ['username']
@@ -27,13 +31,9 @@ router.get('/', (req, res) => {
         ]
     })
     .then(dbPostData => {
-        // Serialize each element
+        // serlialize data before passing to template
         const posts = dbPostData.map(post => post.get({ plain: true }));
-        // Render
-        res.render('homepage', {
-            posts,
-            loggedIn: req.session.loggedIn
-        });
+        res.render('dashboard', { posts, loggedIn: true });
     })
     .catch(err => {
         console.log(err);
@@ -41,26 +41,7 @@ router.get('/', (req, res) => {
     });
 });
 
-// Login page
-router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    };
-    res.render('login');
-});
-
-// Signup page
-router.get('/signup', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    };
-    res.render('signup');
-});
-
-// Single post page
-router.get('/post/:id', (req, res) => {
+router.get('/edit/:id', withAuth, (req, res) => {
     Post.findOne({
         where: {
             post_id: req.params.id
@@ -87,18 +68,9 @@ router.get('/post/:id', (req, res) => {
         ]
     })
     .then(dbPostData => {
-        if (!dbPostData) {
-            res.status(404).json({ message: 'No post found with this id' });
-            return;
-        }
-        // Serialize the data
+        // serlialize data before passing to template
         const post = dbPostData.get({ plain: true });
-
-        // Pass data to template
-        res.render('single-post', {
-            post,
-            loggedIn: req.session.loggedIn    
-        });
+        res.render('edit-post', { post, loggedIn: true });
     })
     .catch(err => {
         console.log(err);

@@ -16,39 +16,42 @@
                     <ul><div class="flex flex-row">
                         <div class="flex justify-left h-12 px-3 py-3 grow">
                                 <li>
-                                    <a href="/" class="bg-slate-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                                    <a href="/" class="bg-slate-900 hover:bg-slate-500 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
                                 </li>
                         </div>
                         <div class="flex justify-right h-12 px-3 py-3">
                             {{#if loggedIn}}
                             <li>
-                                <a href="/dashboard" class="bg-slate-900 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                                <a href="/dashboard" class="bg-slate-900 hover:bg-slate-500 text-white px-3 py-2 mx-3 rounded-md text-sm font-medium">Dashboard</a>
                             </li>
                             <li>
-                                <a href="/logout" class="bg-slate-900 text-white px-3 py-2 rounded-md text-sm font-medium">Logout</a>
+                                <a href="#" id="logout" class="bg-slate-900 hover:bg-slate-500 text-white px-3 py-2 rounded-md text-sm font-medium">Logout</a>
                             </li>
                             {{else}}
                             <li>
-                                <a href="/login" class="bg-slate-900 text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                                <a href="/login" class="bg-slate-900 hover:bg-slate-500 text-white px-3 py-2 rounded-md text-sm font-medium mx-3">Login</a>
+                            </li>
+                            <li>
+                                <a href="/signup" class="bg-slate-900 hover:bg-slate-500 text-white px-3 py-2 rounded-md text-sm font-medium">Sign up</a>
                             </li>
                             {{/if}}
                         </div>
                         </div>
                     </ul>
                 </nav>
-                <h1 class="text-4xl font-black text-slate-800">
+                <h1 class="text-4xl font-black text-slate-800 px-4">
                     <a href="/">Tech Blog</a>
                 </h1>
             </header>
             <main>
                 {{{ body }}}
             </main>
-            <footer>
+            <footer class="px-2">
                 Thanks for visiting!
             </footer>
         </div>
         {{#if loggedIn}}
-        <script src="/javascript/logout.js"></script>
+        <script src="/assets/js/logout.js"></script>
         {{/if}}
     </body>
 </html>
