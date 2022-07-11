@@ -4,6 +4,8 @@
 
 Deployed application:
 
+https://sheltered-wave-14149.herokuapp.com/
+
 Week 14 of Columbia Engineering Coding Bootcamp challenges us to create a tech blog, the first full-stack application of this course. This is an MVC Model-View-Controller application utilizing the following node packages:
 
 * bcrypt
