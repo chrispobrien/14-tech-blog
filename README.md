@@ -46,6 +46,7 @@ Create a .env file in the root folder with contents:
 DB_NAME='ecommerce_db'
 DB_USER='root'
 DB_PASSWORD='your_root_password'
+SECRET='your_secret'
 ```
 
 ## Usage

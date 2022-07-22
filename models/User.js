@@ -7,8 +7,8 @@ class User extends Model {
     // set up method to run on instance data (per user) to check password
     checkPassword(loginPw) {
         return bcrypt.compareSync(loginPw, this.password);
-    };
-};
+    }
+}
 
 // define table columns and configuration
 User.init(
@@ -24,41 +24,47 @@ User.init(
             // instruct that this is the Primary Key
             primaryKey: true,
             // turn on auto increment
-            autoIncrement: true
+            autoIncrement: true,
         },
         // define a username column
         username: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             validate: {
-                isEmail: true
-            }
+                isEmail: true,
+            },
         },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [6]
-            }
-        }
+                len: [6],
+            },
+        },
     },
     {
         // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
 
         hooks: {
             async beforeCreate(newUserData) {
-                newUserData.password = await bcrypt.hash(newUserData.password, 10);
+                newUserData.password = await bcrypt.hash(
+                    newUserData.password,
+                    10
+                );
                 return newUserData;
             },
             async beforeUpdate(updatedUserData) {
-                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+                updatedUserData.password = await bcrypt.hash(
+                    updatedUserData.password,
+                    10
+                );
                 return updatedUserData;
-            }
+            },
         },
         // pass in our imported sequelize connection (the direct connection to our database)
         sequelize,
@@ -69,7 +75,7 @@ User.init(
         // use underscores insead of camel-casing (i.e. 'comment_text' and not 'commentText')
         underscored: true,
         // make it so our model name stays lowercase in the database
-        modelName: 'user'
+        modelName: 'user',
     }
 );
 

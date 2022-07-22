@@ -1,3 +1,4 @@
+// sign up/register new account
 async function signupFormHandler(event) {
     event.preventDefault();
 
@@ -12,21 +13,23 @@ async function signupFormHandler(event) {
                 body: JSON.stringify({
                     username,
                     email,
-                    password
+                    password,
                 }),
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
             });
-        
+
             // check the response status
             if (response.ok) {
                 document.location.replace('/dashboard');
             } else {
                 alert(response.statusText);
-            };
+            }
         } catch (error) {
             alert(error);
-        };
-    };
-};
+        }
+    }
+}
 
-document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
+document
+    .querySelector('.signup-form')
+    .addEventListener('submit', signupFormHandler);

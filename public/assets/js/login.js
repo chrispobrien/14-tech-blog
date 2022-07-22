@@ -10,20 +10,23 @@ async function loginFormHandler(event) {
                 method: 'post',
                 body: JSON.stringify({
                     email,
-                    password
+                    password,
                 }),
-                headers: { 'Content-Type': 'application/json'}
+                headers: { 'Content-Type': 'application/json' },
             });
 
+            // check the response status
             if (response.ok) {
                 document.location.replace('/dashboard');
             } else {
                 alert(response.statusText);
-            };
+            }
         } catch (error) {
             alert(error);
-        };
-    };
-};
+        }
+    }
+}
 
-document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
+document
+    .querySelector('.login-form')
+    .addEventListener('submit', loginFormHandler);
