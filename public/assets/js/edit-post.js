@@ -8,21 +8,25 @@ async function editFormHandler(event) {
         window.location.toString().split('/').length - 1
       ];
 
-    const response = await fetch(`/api/posts/${post_id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-            post_title,
-            post_text
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+    try {
+        const response = await fetch(`/api/posts/${post_id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                post_title,
+                post_text
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
-    if (response.ok) {
-        document.location.replace('/dashboard');
-    } else {
-        alert(response.statusText);
+        if (response.ok) {
+            document.location.replace('/dashboard');
+        } else {
+            alert(response.statusText);
+        };
+    } catch(error) {
+        alert(error);
     };
 };
 
@@ -33,17 +37,20 @@ async function deleteFormHandler(event) {
         window.location.toString().split('/').length - 1
       ];
 
-    const response = await fetch(`/api/posts/${post_id}`, {
-        method: 'DELETE'
-    });
+      try {
+        const response = await fetch(`/api/posts/${post_id}`, {
+            method: 'DELETE'
+        });
 
-    if (response.ok) {
-        document.location.replace('/dashboard');
-    } else {
-        alert(response.statusText);
+        if (response.ok) {
+            document.location.replace('/dashboard');
+        } else {
+            alert(response.statusText);
+        };
+    } catch (error) {
+        alert(error);
     };
-
-}
+};
 
 document.querySelector('.edit-post-form').addEventListener('submit', editFormHandler);
 document.querySelector('#delete').addEventListener('click',deleteFormHandler);

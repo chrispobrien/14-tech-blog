@@ -5,19 +5,23 @@ async function loginFormHandler(event) {
     const password = document.querySelector('#password-login').value.trim();
 
     if (email && password) {
-        const response = await fetch('/api/users/login', {
-            method: 'post',
-            body: JSON.stringify({
-                email,
-                password
-            }),
-            headers: { 'Content-Type': 'application/json'}
-        });
+        try {
+            const response = await fetch('/api/users/login', {
+                method: 'post',
+                body: JSON.stringify({
+                    email,
+                    password
+                }),
+                headers: { 'Content-Type': 'application/json'}
+            });
 
-        if (response.ok) {
-            document.location.replace('/dashboard');
-        } else {
-            alert(response.statusText);
+            if (response.ok) {
+                document.location.replace('/dashboard');
+            } else {
+                alert(response.statusText);
+            };
+        } catch (error) {
+            alert(error);
         };
     };
 };
