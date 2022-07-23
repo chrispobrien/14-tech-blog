@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const { apiAuth } = require('../../utils/auth');
 
-// Get api/users
+// Get all users GET api/users
 router.get('/', apiAuth, (req, res) => {
     User.findAll({
         attributes: {
@@ -16,7 +16,7 @@ router.get('/', apiAuth, (req, res) => {
         });
 });
 
-// GET api/users/1
+// get one user GET api/users/1
 router.get('/:id', apiAuth, (req, res) => {
     User.findOne({
         where: { user_id: req.params.id },
@@ -121,7 +121,7 @@ router.post('/logout', apiAuth, (req, res) => {
     }
 });
 
-// PUT /api/users/1
+// change user info - PUT /api/users/1
 router.put('/:id', apiAuth, (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
 

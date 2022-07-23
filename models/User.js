@@ -49,7 +49,8 @@ User.init(
     },
     {
         // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
-
+        // these hooks hash the password before creation and before updating
+        //  so that the password is stored in the database encrypted
         hooks: {
             async beforeCreate(newUserData) {
                 newUserData.password = await bcrypt.hash(

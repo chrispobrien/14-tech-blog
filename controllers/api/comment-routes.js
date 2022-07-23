@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User, Comment } = require('../../models');
 const { apiAuth } = require('../../utils/auth');
 
+// Get all comments
 router.get('/', (req, res) => {
     Comment.findAll({
         include: [
@@ -18,6 +19,7 @@ router.get('/', (req, res) => {
         });
 });
 
+// Create new comment
 router.post('/', apiAuth, (req, res) => {
     Comment.create({
         comment_text: req.body.comment_text,

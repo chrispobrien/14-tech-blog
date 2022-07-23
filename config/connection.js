@@ -1,10 +1,12 @@
 // Import the sequelize constructor from the library
 const Sequelize = require('sequelize');
+// Load environment variables, either from .env for local or from host (like Heroku)
 require('dotenv').config();
 
 // create connection to our database
 let sequelize;
 
+// Heroku uses JAWS
 if (process.env.JAWSDB_URL) {
     sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
