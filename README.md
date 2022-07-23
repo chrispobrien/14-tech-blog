@@ -2,6 +2,8 @@
 
 ## Description
 
+[![Tech Blog][screenshot]](./public/assets/images/screenshot.png)
+
 Deployed application:
 
 https://sheltered-wave-14149.herokuapp.com/
@@ -43,7 +45,7 @@ exit
 Create a .env file in the root folder with contents:
 
 ```
-DB_NAME='ecommerce_db'
+DB_NAME='tech_blog_db'
 DB_USER='root'
 DB_PASSWORD='your_root_password'
 SECRET='your_secret'
@@ -51,9 +53,7 @@ SECRET='your_secret'
 
 ## Usage
 
-[![Tech Blog][screenshot]](./public/assets/images/screenshot.png)
-
-Simply start the server
+There are no seeds. Simply start the server
 
 ```sh
 npm start
