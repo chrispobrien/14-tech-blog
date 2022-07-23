@@ -7,11 +7,11 @@ test('format_date() returns a date string', () => {
 });
 
 test('format_plural() returns a pluralized string', () => {
-    const word1 = format_plural('comment');
-    const word2 = format_plural('post');
-    const word3 = format_plural('upvote');
+    const word1 = format_plural('comment',1);
+    const word2 = format_plural('post',2);
+    const word3 = format_plural('upvote',2);
 
-    expect(word1).toBe('comments');
+    expect(word1).toBe('comment');
     expect(word2).toBe('posts');
     expect(word3).toBe('upvotes');
 });
